@@ -13110,9 +13110,32 @@ rename title in file to "Analysis of NFL Play by Play Data"</p>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<p><a href="https://www.kaggle.com/maxhorowitz/nflplaybyplay2009to2016">https://www.kaggle.com/maxhorowitz/nflplaybyplay2009to2016</a> <br>
+if necessary^</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="\&lt;import&gt;">\&lt;import&gt;<a class="anchor-link" href="#\&lt;import&gt;">&#182;</a></h1>
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
@@ -13120,6 +13143,206 @@ rename title in file to "Analysis of NFL Play by Play Data"</p>
 <h1 id="Data-Collection">Data Collection<a class="anchor-link" href="#Data-Collection">&#182;</a></h1>
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Read data in chunks so it fits in memory</span>
+<span class="n">chunks</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;NFL Play by Play 2009-2017.csv&quot;</span><span class="p">,</span> <span class="n">chunksize</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">data_master</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">chunks</span><span class="p">)</span>
+<span class="n">data_master</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[2]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Date</th>
+      <th>GameID</th>
+      <th>Drive</th>
+      <th>qtr</th>
+      <th>down</th>
+      <th>time</th>
+      <th>TimeUnder</th>
+      <th>TimeSecs</th>
+      <th>PlayTimeDiff</th>
+      <th>SideofField</th>
+      <th>...</th>
+      <th>yacEPA</th>
+      <th>Home_WP_pre</th>
+      <th>Away_WP_pre</th>
+      <th>Home_WP_post</th>
+      <th>Away_WP_post</th>
+      <th>Win_Prob</th>
+      <th>WPA</th>
+      <th>airWPA</th>
+      <th>yacWPA</th>
+      <th>Season</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2009-09-10</td>
+      <td>2009091000</td>
+      <td>1</td>
+      <td>1</td>
+      <td>NaN</td>
+      <td>15:00</td>
+      <td>15</td>
+      <td>3600.0</td>
+      <td>0.0</td>
+      <td>TEN</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>0.485675</td>
+      <td>0.514325</td>
+      <td>0.546433</td>
+      <td>0.453567</td>
+      <td>0.485675</td>
+      <td>0.060758</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>2009</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2009-09-10</td>
+      <td>2009091000</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1.0</td>
+      <td>14:53</td>
+      <td>15</td>
+      <td>3593.0</td>
+      <td>7.0</td>
+      <td>PIT</td>
+      <td>...</td>
+      <td>1.146076</td>
+      <td>0.546433</td>
+      <td>0.453567</td>
+      <td>0.551088</td>
+      <td>0.448912</td>
+      <td>0.546433</td>
+      <td>0.004655</td>
+      <td>-0.032244</td>
+      <td>0.036899</td>
+      <td>2009</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2009-09-10</td>
+      <td>2009091000</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2.0</td>
+      <td>14:16</td>
+      <td>15</td>
+      <td>3556.0</td>
+      <td>37.0</td>
+      <td>PIT</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>0.551088</td>
+      <td>0.448912</td>
+      <td>0.510793</td>
+      <td>0.489207</td>
+      <td>0.551088</td>
+      <td>-0.040295</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>2009</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2009-09-10</td>
+      <td>2009091000</td>
+      <td>1</td>
+      <td>1</td>
+      <td>3.0</td>
+      <td>13:35</td>
+      <td>14</td>
+      <td>3515.0</td>
+      <td>41.0</td>
+      <td>PIT</td>
+      <td>...</td>
+      <td>-5.031425</td>
+      <td>0.510793</td>
+      <td>0.489207</td>
+      <td>0.461217</td>
+      <td>0.538783</td>
+      <td>0.510793</td>
+      <td>-0.049576</td>
+      <td>0.106663</td>
+      <td>-0.156239</td>
+      <td>2009</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2009-09-10</td>
+      <td>2009091000</td>
+      <td>1</td>
+      <td>1</td>
+      <td>4.0</td>
+      <td>13:27</td>
+      <td>14</td>
+      <td>3507.0</td>
+      <td>8.0</td>
+      <td>PIT</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>0.461217</td>
+      <td>0.538783</td>
+      <td>0.558929</td>
+      <td>0.441071</td>
+      <td>0.461217</td>
+      <td>0.097712</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>2009</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 102 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
@@ -13139,6 +13362,13 @@ rename title in file to "Analysis of NFL Play by Play Data"</p>
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Analysis">Analysis<a class="anchor-link" href="#Analysis">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Insight">Insight<a class="anchor-link" href="#Insight">&#182;</a></h1>
 </div>
 </div>
 </div>
