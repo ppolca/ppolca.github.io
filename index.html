@@ -14514,7 +14514,7 @@ rename title in file to "Analysis of NFL Play by Play Data"</p>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>There are a few columns that inform us if a turnover has happened, but it would be useful to combine these so we can know if a turnover has happened at all. A turnover counts as an interception or a fumble where the defending team ends up with the ball.</p>
+<p>There are a few columns that inform us if a type of turnover has happened, but it would be useful to combine these so we can know if a turnover of any type has happened. A turnover counts as an interception or a fumble where the defending team ends up with the ball.</p>
 
 </div>
 </div>
@@ -15597,7 +15597,7 @@ Number of run plays: 120831
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Next and finally, we will attempt to create a model that predicts the winner of an NFL game, based on certain statistics. The statistics we will include are all of those in the $game\_data$ dataframe, minus the statistics that directly tell us how many points a team has scored. These stats will be removed, as if the model knows how many points a team has scored, it can immediately know who has won. We will also remove the winner, team, and id columns, as we do not want either of those to have any bearing on the prediction. We will use a random forest to create our prediction model, and 10-fold cross-validation to test the prediction strength. As the data we are currently using has one row for each team, our model will predict if a team has won based on their statistics.</p>
+<p>Next and finally, we will attempt to create a model that predicts the winner of an NFL game, based on certain statistics. The statistics we will include are all of those in the $game\_data$ dataframe, minus the statistics that directly tell us how many points a team has scored. These stats will be removed, as if the model knows how many points a team has scored, it can immediately know who has won. We will also remove the winner, team, and id columns, as we do not want either of those to have any bearing on the prediction. We will use a <a href="https://en.wikipedia.org/wiki/Random_forest">random forest</a> to create our prediction model, and 10-fold cross-validation to test the prediction strength. As the data we are currently using has one row for each team, our model will predict if a team has won based on their statistics.</p>
 
 </div>
 </div>
@@ -16545,7 +16545,7 @@ True values: [1. 1.]
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We now have a model that does a pretty good job predicting which team is the winner, but it would be interesting to see which statistics are considered more important in terms of predicting the outcome of a game. To find out which stats are important, we can use a logisitic regression model. Because some stats are wildly different from others, we will first scale the data to make everything go smoothly. Below, we create a logistic regression model (accuracy found again with 10-fold cross-validation) and look at the weights to see which stats have higher weights in the prediction.</p>
+<p>We now have a model that does a pretty good job predicting which team is the winner, but it would be interesting to see which statistics are considered more important in terms of predicting the outcome of a game. To find out which stats are important, we can use a logistic regression model. Because some stats are wildly different from others, we will first scale the data to make everything go smoothly. Below, we create a logistic regression model (accuracy found again with 10-fold cross-validation) and look at the weights to see which stats have higher weights in the prediction.</p>
 
 </div>
 </div>
@@ -16665,7 +16665,7 @@ pass_yards2: -0.713
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Using a simplified version of the above list, we can try to predict the winner of an NFL game on our own, without a computer model (the method, however, we got from the computer model). This method is not guarenteed to work, but based on the model's accuracy score, we can expect to be right most of the time. In order to try this out for yourself, follow the below steps:</p>
+<p>Using a simplified version of the above list, we can try to predict the winner of an NFL game on our own, without a computer model (the method, however, we got from the computer model). This method is not guaranteed to work, but based on the model's accuracy score, we can expect to be right most of the time. In order to try this out for yourself, follow the below steps:</p>
 
 </div>
 </div>
@@ -16708,23 +16708,26 @@ pass_yards2: -0.713
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>understand some football psychology??? pog! (also put something about this in the intro as it is actually interesting)</p>
+<p>Hopefully, you learned at least a little bit about some of the reasons as to why certain things happen in football games, including when teams score, preferences between passing and running the ball, and where interceptions are a little more common.</p>
 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
-</pre></div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We also made a couple of models to predict the winner of a game. The first one that we made accepted certain statistics about one team, and predicted if that team won the game, while the second accepted the same statistics but for both teams. Interestingly, the second model had a better accuracy by 5% (85% vs 80%). We also found that the four most important statistics based on our models are passing yards, total yards, passing attempts, and turnovers. There is definitely room to improve the accuracy of these models, as there are other statistics that we could add, such as the number of first downs. Additional research could also be done into using statistics known before a game in order to predict the outcome, such as statistics from previous games and which team is the favorite to win.</p>
 
-    </div>
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Thank you for reading and I hope this was both interesting and educational!</p>
 
+</div>
+</div>
 </div>
     </div>
   </div>
